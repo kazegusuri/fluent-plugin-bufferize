@@ -1,4 +1,4 @@
-# fluent-plugin-bufferize
+# fluent-plugin-bufferize, a plugin for [Fluentd](http://fluentd.org)
 
 An adapter plugin which enables existing non-buffered plugins to resend messages easily in case of unexpected exceptions without creating duplicate messages.
 
