@@ -3,6 +3,8 @@ module Fluent
     Plugin.register_output('bufferize', self)
 
     class PosKeeper
+      FILE_PERMISSION = 0644
+
       @@instances = {}
 
       def self.get(chunk)
@@ -22,7 +24,7 @@ module Fluent
         if chunk.respond_to? :path
           @path = chunk.path +  ".pos"
           mode = File::CREAT | File::RDWR
-          perm = DEFAULT_FILE_PERMISSION
+          perm = FILE_PERMISSION
           @io = File.open(@path, mode, perm)
           @io.sync = true
           line = @io.gets
