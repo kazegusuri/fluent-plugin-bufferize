@@ -104,8 +104,8 @@ module Fluent
     end
 
     def shutdown
-      super
       @output.shutdown
+      super
     end
 
     def format(tag, time, record)
