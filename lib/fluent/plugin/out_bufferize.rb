@@ -89,9 +89,9 @@ module Fluent
         raise ConfigError, "Befferize: just one <config> directive is required"
       end
 
-      type = configs.first['type']
+      type = configs.first['type'] || configs.first['@type']
       unless type
-        raise ConfigError, "Befferize: 'type' parameter is required in <config> directive"
+        raise ConfigError, "Befferize: '@type' parameter is required in <config> directive"
       end
 
       @output = Plugin.new_output(type)
