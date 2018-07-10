@@ -37,7 +37,7 @@ module Fluent
 
       def each(&block)
         @chunk.open do |io|
-          u = MessagePack::Unpacker.new(io)
+          u = Fluent::MessagePackFactory.unpacker(io)
           begin
             if @count > 0
               $log.debug "Bufferize: skip first #{@count} messages" 
@@ -109,7 +109,8 @@ module Fluent
     end
 
     def format(tag, time, record)
-      [tag, time, record].to_msgpack
+      pk = Fluent::MessagePackFactory.packer
+      pk.write([tag, time, record]).to_s
     end
 
     def write(chunk)
